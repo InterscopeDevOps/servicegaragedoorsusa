@@ -1,0 +1,113 @@
+---
+import type { ApiData } from "../../interfaces/dbData";
+import { MenuHeader } from "./MenuHeader";
+import { RedesIcons } from "../RedesIcons";
+
+let UrlApi = import.meta.env.API_URL;
+let KetApi = import.meta.env.API_KEY;
+// Realiza la llamada a la API
+const response = await fetch(`${UrlApi}/${KetApi}`);
+const data: ApiData = await response.json();
+
+const onePages = data.widgets.onePages;
+
+let open = false;
+---
+
+<style>
+  .cortehead {
+    clip-path: polygon(88% 0, 100% 100%, 0 100%, 0 0);
+  }
+
+  .headbuton {
+    --border: 5px; /* the border width */
+    --slant: 0.7em; /* control the slanted corners */
+
+    border: none;
+    clip-path: polygon(
+      0 0,
+      calc(100% - var(--slant)) 0,
+      100% var(--slant),
+      100% 100%,
+      var(--slant) 100%,
+      0 calc(100% - var(--slant))
+    );
+  }
+</style>
+
+<header class="z-[10] top-0 w-full bg-primary">
+  <div class="md:w-100 flex justify-around items-center bg-primary pb-2">
+    <div class="md:w-[65%] w-full md:-ml-[22%] ml-0 h-full">
+      <ul class="flex flex-col md:flex-row items-center justify-end space-x-2 md:my-2 my-4">
+        <li
+          class="text-white md:text-[17px] text-[16px] md:block"
+        >
+          <span class="pr-3 flex items-center text-[14px] md:text-[18px]">
+            {
+              data.dataGeneral.phones.slice(0, 2)?.map((item) => (
+                <div>
+                  <a class=" flex ml-4" href={`tel:+1${item.number}`}>
+                    <i class="fa-solid fa-phone text-base text-white mr-2" />
+                    <h5 class="text-base">
+                      {item.number} -{" "}
+                      {item.title.length > 0 ? item.title : "Phone Number"}
+                    </h5>
+                  </a>
+                </div>
+              ))
+            }
+          </span>
+        </li>
+        <li
+          class="text-white md:text-[17px] text-[16px] md:block hidden"
+        >
+          <span class="pr-3 flex items-center text-[14px] md:text-[18px]">
+            {
+              data.dataGeneral.emails.slice(0, 2)?.map((item) => (
+                <div>
+                  <a class=" flex ml-4" href={`tel:+1${item.email}`}>
+                    <i class="fa-solid fa-envelope text-base text-white mr-2" />
+                    <h5 class="text-base">
+                      {item.email}
+                      
+                    </h5>
+                  </a>
+                </div>
+              ))
+            }
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <ul class="md:flex hidden justify-center space-x-7 my-2">
+        <RedesIcons redesSociales={data?.redesSociales} />
+      </ul>
+    </div>
+  </div>
+
+  <div class="flex border-white border-t-2 py-2">
+    <div class="flex w-[85%] lg:w-[85%] mx-auto justify-center items-center">
+      <div class="w-[200%] md:w-[40%] lg:w-[16%] ">
+        <picture>
+          <img
+            src={data.logos.secondary}
+            alt={`logo ${data?.name}`}
+            loading="eager"
+            class="w-[100%] md:w-[100%] mx-auto my-0"
+            width="300"
+            height="200"
+          />
+        </picture>
+      </div>
+      <div class="flex space-x-3 w-full mx-auto justify-center">
+        <div>
+          <MenuHeader client:load data={data} />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+</header>
