@@ -12,7 +12,7 @@ const response = await fetch(`${UrlApi}/${KetApi}`);
 const data: ApiData = await response.json();
 ---
 
-<header class="bg-[#1e1e1e] relative z-50" transition:animate="none">
+<header class="bg-white relative z-50" transition:animate="none">
   <div class="bg3">
     <div
       class="md:w-[70%] w-[100%] mx-auto hidden md:flex justify-between items-center px-14 py-5 rounded-br-[10px] rounded-bl-[10px]"
@@ -48,7 +48,7 @@ const data: ApiData = await response.json();
                 >
                   <i class={`fa-solid fa-map text-[26px] text-white`} />
                 </span>
-                <div class="flex text-white flex-col pl-2">
+                <div class="flex text-black flex-col pl-2">
                   <span
                     class="font-bold text-[20px] text-btnHover"
                   >
@@ -80,7 +80,7 @@ const data: ApiData = await response.json();
                   >
                     {item.days}
                   </span>
-                  <span>{item.hours}</span>
+                  <span class="text-black">{item.hours}</span>
                 </div>
               </div>
             );
