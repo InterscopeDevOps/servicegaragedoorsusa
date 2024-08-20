@@ -87,7 +87,7 @@ const HomeBlocks: React.FC<HomeBlocksProps> = ({
                 style={{
                   backgroundImage: `url("${homeSection[0].additionalImages[0]}")`,
                   backgroundSize: "cover",
-                  backgroundPosition: "center",
+                  // backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
                 }}
               ></div>
